@@ -1,5 +1,6 @@
 #include "discord_game_sdk.h"
 
+typedef void* IDiscordCoreEvents;
 
 int main()
 {
@@ -12,10 +13,11 @@ int main()
     // Don't forget to memset or otherwise initialize your classes!
     memset(&app, 0, sizeof(app));
     
-    struct IDiscordCoreEvents events;
-    memset(&events, 0, sizeof(events));
+    IDiscordCoreEvents events;
+    memset(&events, 0, 8);
     
     struct DiscordCreateParams params;
+    DiscordCreateParamsSetDefault(&params);
     params.client_id = 808412626391662592;
     params.flags = DiscordCreateFlags_Default;
     params.events = &events;
