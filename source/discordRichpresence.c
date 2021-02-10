@@ -1,4 +1,6 @@
 #include "discord_game_sdk.h"
+#include <stdio.h> 
+
 
 typedef void* IDiscordCoreEvents;
 
@@ -25,4 +27,11 @@ int main()
     
     DiscordCreate(DISCORD_VERSION, &params, &app.core);
     
+    //setup loop
+    //
+    //checks for updates every 20s, updates discord side
+    //checks if it should exit
+    //
+    //after loop exits, runs proper exiting code
+    //
 }
