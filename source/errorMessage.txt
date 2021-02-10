@@ -1,0 +1,8 @@
+/usr/bin/ld: /tmp/cc49C44H.o: in function `main':
+discordRichpresence.c:(.text.startup+0xe5): undefined reference to `DiscordCreate'
+collect2: error: ld returned 1 exit status
+
+shell returned 1
+
+Press ENTER or type command to continue
+
