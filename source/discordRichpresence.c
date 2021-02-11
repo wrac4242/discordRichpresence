@@ -40,7 +40,7 @@ int main()
         sleep(5);//waits for 5s before updating again
         //update discord, and exit codes
         update_presence(activity_manager);
-        enum EDiscordResult result = app.core->run_callbacks(&app.core);
+        enum EDiscordResult result = app.core->run_callbacks(app.core);
         if (result !=DiscordResult_Ok) {  
             printf("error code:%d", result);
             running = false;
