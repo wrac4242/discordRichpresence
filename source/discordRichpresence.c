@@ -1,8 +1,10 @@
 #include "discord_game_sdk.h"
 #include <stdio.h> 
-
+#include <stdbool.h> 
+#include <unistd.h>
 
 typedef void* IDiscordCoreEvents;
+void update_presence(struct IDiscordActivityManager* activity_manager);
 
 int main()
 {
@@ -27,11 +29,33 @@ int main()
     
     DiscordCreate(DISCORD_VERSION, &params, &app.core);
     
+    printf("Discord presence app started successfully\n");
+    bool running = true;
+    
+    //creates activity manager
+    struct IDiscordActivityManager* activity_manager = app.core -> get_activity_manager(app.core);  
+
     //setup loop
-    //
-    //checks for updates every 20s, updates discord side
+    while (running == true){ 
+        sleep(5);//waits for 5s before updating again
+        //update discord, and exit codes
+        update_presence(activity_manager);
+        enum EDiscordResult result = app.core->run_callbacks(&app.core);
+        if (result !=DiscordResult_Ok) {  
+            printf("error code:%d", result);
+            running = false;
+        }
+    }
+    //checks for updates every 0.5s, updates discord side
     //checks if it should exit
     //
     //after loop exits, runs proper exiting code
     //
+}
+
+void update_presence(struct IDiscordActivityManager* activity_manager)
+{
+    //generates richpresents
+    //sets it to the values needed
+    //updates the presence 
 }
