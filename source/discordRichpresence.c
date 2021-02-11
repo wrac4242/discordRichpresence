@@ -79,11 +79,13 @@ void update_presence(struct IDiscordActivityManager* activity_manager, struct Ap
     char details[] = "big potato man"; 
     DiscordTimestamp start = 666;
     char large_text[] = "fishes";
+    char large_image[] = "weeb_thing";
     
     strncpy(activity.state, state, sizeof(activity.state));
     strncpy(activity.details, details, sizeof(activity.details));
     activity.timestamps.start = start; 
     strncpy(activity.assets.large_text, large_text, sizeof(activity.assets.large_text)); 
+    strncpy(activity.assets.large_image, large_image, sizeof(activity.assets.large_image));
 
     callback callback_presence = &callback_func;
     activity_manager -> update_activity(activity_manager, &activity,app.core,callback_presence);
