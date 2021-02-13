@@ -2,7 +2,7 @@
  get the presence to read from a file
  live updating
  checks for file changes every minute or so
- allow cycling between presences: linked lists?
+ allow cycling between presences: linked lists, triple ref?
  gui?
  a way to take it down neatly
  
