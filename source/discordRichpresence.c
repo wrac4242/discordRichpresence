@@ -3,15 +3,8 @@
 #include <stdbool.h> 
 #include <unistd.h>
 #include <string.h> 
+#include "richPresenceFunctions.h"
 
-typedef void* IDiscordCoreEvents;
-typedef void (*callback)(void* callback_data, enum EDiscordResult result);
-struct Application {
-    struct IDiscordCore* core;
-    struct IDiscordUsers* users; 
-};
-
-void update_presence(struct IDiscordActivityManager* activity_manager, struct Application app);
 void callback_func(void* callback_data, enum EDiscordResult result);
 
 int status = 0;
@@ -49,7 +42,7 @@ int main()
         //update discord, and exit codes
         printf("Updating presence\n");
 
-        update_presence(activity_manager,app);
+        update_presence(activity_manager,app,&callback_func);
         enum EDiscordResult result = app.core->run_callbacks(app.core);
         if (result !=DiscordResult_Ok) {  
             printf("error code:%d", result);
@@ -65,34 +58,6 @@ int main()
     //
     //after loop exits, runs proper exiting code
     //
-}
-
-void update_presence(struct IDiscordActivityManager* activity_manager, struct Application app)
-{
-    //generates richpresents
-    //sets it to the values needed
-    //updates the presence
-    struct DiscordActivity activity;
-    memset(&activity, 0, sizeof(activity));
-
-    char state[] = "How to exit vim";
-    char details[] = "big potato man"; 
-    DiscordTimestamp start = 666;
-    char large_text[] = "fishes";
-    char large_image[] = "weeb_thing";
-    char small_text[] = "happy lunar new year"; 
-    char small_image[] = "oxething";
-
-    strncpy(activity.state, state, sizeof(activity.state));
-    strncpy(activity.details, details, sizeof(activity.details));
-    activity.timestamps.start = start; 
-    strncpy(activity.assets.large_text, large_text, sizeof(activity.assets.large_text)); 
-    strncpy(activity.assets.large_image, large_image, sizeof(activity.assets.large_image));
-    strncpy(activity.assets.small_text, small_text, sizeof(activity.assets.small_text)); 
-    strncpy(activity.assets.small_image, small_image, sizeof(activity.assets.small_image));
-
-    callback callback_presence = &callback_func;
-    activity_manager -> update_activity(activity_manager, &activity,app.core,callback_presence);
 }
 
 void callback_func(void* callback_data, enum EDiscordResult result)
