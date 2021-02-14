@@ -1,0 +1,9 @@
+extraction:
+  cpp:
+     prepare:
+        packages:
+     configure:
+        command:
+     index:
+        build_command:
+        - cd source && ./make.sh
