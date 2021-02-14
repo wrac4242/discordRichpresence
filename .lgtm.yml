@@ -6,4 +6,4 @@ extraction:
         command:
      index:
         build_command:
-        - cd source && ./make.sh
+        -  source/make.sh
